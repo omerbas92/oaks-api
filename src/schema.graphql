@@ -1,0 +1,46 @@
+type Query {
+  returnSinglePhase(id: ID): Phase!
+  returnAllPhases: [Phase!]!
+  returnSingleTask(id: ID): Task!
+  returnAllTasks: [Task!]!
+}
+
+type Mutation {
+  createPhase(data: PhaseInput!): Phase!
+  createTask(data: TaskInput!): Task!
+  updatePhase(data: PhaseInput!): Phase!
+  updateTask(data: TaskInput!): Task!
+  updateTaskIsCompleted(data: TaskIsCompletedInput!): Task!
+  deletePhase(id: String!): Boolean!
+  deleteTask(id: String!): Boolean!
+}
+
+type Phase {
+  phaseId: ID!
+  name: String!
+  order: Int!
+}
+
+type Task {
+  taskId: ID!
+  phaseId: ID!
+  name: String!
+  isCompleted: Boolean!
+}
+
+input PhaseInput {
+  name: String!
+  order: Int!
+}
+
+input TaskInput {
+  taskId: ID
+  phaseId: ID
+  name: String!
+  isCompleted: Boolean!
+}
+
+input TaskIsCompletedInput {
+  taskId: ID!
+  isCompleted: Boolean!
+}
